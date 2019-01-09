@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.controllers.StartController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="60.0" prefHeight="40.0" prefWidth="400.0" text="WELCOME ON BOARD!&#10;" textAlignment="CENTER" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="60.0" />
+      <MediaView fx:id="movie" fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="253.0" />
+      <Button fx:id="btnInit" layoutX="363.0" layoutY="485.0" mnemonicParsing="false" onAction="#init" text="Rozpocznij" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="480.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="213.0" prefHeight="40.0" prefWidth="400.0" text="This is your mission:&#10;" textAlignment="CENTER" />
+      <TextField fx:id="userName" layoutX="382.0" layoutY="146.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="146.0" prefHeight="25.0" prefWidth="177.0" text="Your Name:&#10;" textAlignment="CENTER" />
+   </children>
+</AnchorPane>
