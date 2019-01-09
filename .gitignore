@@ -19,6 +19,7 @@ hs_err_pid*
 ## Directory-based project format:
 .idea/
 # if you remove the above rule, at least ignore the following:
+.idea
 
 # User-specific stuff:
 # .idea/workspace.xml
@@ -59,17 +60,3 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
-# Created by .ignore support plugin (hsz.mobi)
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Press h to open a hovercard with more details.
