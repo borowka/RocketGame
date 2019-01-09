@@ -1,5 +1,5 @@
 .root{
-    -fx-background-image: url("bg.jpg");
+    -fx-background-color: #00425F ;
     -fx-font-size: 15pt;
     -fx-text-fill: white;
 
@@ -12,6 +12,17 @@
     -fx-text-fill: white;
     -fx-alignment: CENTER;
     -fx-padding: 3 6 6 6;
+    -fx-background-radius: 30;
+    -fx-font-style: bold;
+    -fx-padding: 5;
+}
+
+.button:hover{
+    -fx-background-color: #0ca1b4;
+}
+
+.button:pressed{
+    -fx-background-color: #007ccc;
 }
 
 #playPane{
@@ -22,10 +33,4 @@
 }
 #scoresPane{
     -fx-background-color: #333333;
-}
-
-#btnInit{
-    -fx-font-size: 30px;
-    -fx-background-color: #333333;
-    -fx-text-fill: white;
 }

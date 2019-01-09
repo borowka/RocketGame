@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -18,13 +19,16 @@ import java.net.MalformedURLException;
 public class StartController {
 
     @FXML
-    private MediaView movie;
+    private ImageView view;
 
     @FXML
     private TextField userName;
 
     @FXML
     private Button btnInit;
+
+    @FXML
+    private MediaView media;
 
     @FXML
     void init(ActionEvent event) {
