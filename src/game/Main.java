@@ -31,7 +31,7 @@ public class Main extends Application {
             panes.add(FXMLLoader.load(getClass().getResource("views/game.fxml")));
             root.getChildren().add(panes.get(0));
             Scene scene = new Scene(root, 800, 600);
-            FileInputStream inputStream = new FileInputStream("cursor.png");
+            FileInputStream inputStream = new FileInputStream("Resources/cursor.png");
             Image image = new Image(inputStream);
             Cursor cursor = new ImageCursor(image);
             scene.setCursor(cursor);
