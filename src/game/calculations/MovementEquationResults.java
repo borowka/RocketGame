@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DifferentialEquationPath implements StepHandler {
+public class MovementEquationResults implements StepHandler {
     private List<Double> tList = new ArrayList<>();
     private List<Double> hList = new ArrayList<>();
     private List<Double> vList = new ArrayList<>();
@@ -54,6 +54,22 @@ public class DifferentialEquationPath implements StepHandler {
                 fileWriter.close();
             }
         }
+    }
+
+    public List<Double> gettList() {
+        return tList;
+    }
+
+    public List<Double> gethList() {
+        return hList;
+    }
+
+    public List<Double> getvList() {
+        return vList;
+    }
+
+    public List<Double> getmList() {
+        return mList;
     }
 }
 

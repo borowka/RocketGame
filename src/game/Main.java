@@ -36,6 +36,7 @@ public class Main extends Application {
             scene.getStylesheets().add(getClass().getResource("css/Style.css").toExternalForm());
             primaryStage.setTitle("SPACESHIP GAME");
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
 
         } catch (Exception e ){
