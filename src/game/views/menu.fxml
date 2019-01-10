@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +12,7 @@
         <AnchorPane fx:id="newGamePane" layoutX="42.0" layoutY="110.0" prefHeight="390.0" prefWidth="713.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="130.0">
             <children>
                 <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#playGame" text="PLAY" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="300.0" />
-                <RadioButton contentDisplay="CENTER" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="247.0" textAlignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="100.0">
+                <RadioButton fx:id="greyRocket" contentDisplay="CENTER" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#greySelected" prefHeight="139.0" prefWidth="247.0" textAlignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="100.0">
                     <graphic>
                         <ImageView fitHeight="200.0" fitWidth="140.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -19,8 +20,11 @@
                             </image>
                         </ImageView>
                     </graphic>
+               <toggleGroup>
+                  <ToggleGroup fx:id="buttonGroup" />
+               </toggleGroup>
                 </RadioButton>
-            <RadioButton contentDisplay="CENTER" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="247.0" textAlignment="CENTER" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="100.0">
+            <RadioButton fx:id="whiteRocket" contentDisplay="CENTER" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" onAction="#whiteSelected" prefHeight="139.0" prefWidth="247.0" textAlignment="CENTER" toggleGroup="$buttonGroup" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="100.0">
                <graphic>
                   <ImageView fitHeight="200.0" fitWidth="140.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -29,7 +33,7 @@
                   </ImageView>
                </graphic>
             </RadioButton>
-            <RadioButton contentDisplay="CENTER" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="247.0" textAlignment="CENTER" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
+            <RadioButton fx:id="blueRocket" contentDisplay="CENTER" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" onAction="#blueSelected" prefHeight="139.0" prefWidth="247.0" textAlignment="CENTER" toggleGroup="$buttonGroup" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
                <graphic>
                   <ImageView fitHeight="200.0" fitWidth="140.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                      <image>

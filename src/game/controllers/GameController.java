@@ -1,14 +1,19 @@
 package game.controllers;
 
 import game.Main;
+import game.model.RocketImage;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-public class GameController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class GameController implements Initializable {
 
     @FXML
     private Button btnMenu;
@@ -53,4 +58,8 @@ public class GameController {
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        RocketImage.INSTANCE.setImageView(rocket);
+    }
 }

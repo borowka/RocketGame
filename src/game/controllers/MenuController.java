@@ -1,13 +1,35 @@
 package game.controllers;
 
 import game.Main;
+import game.model.RocketImage;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import java.io.*;
 
-public class MenuController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MenuController implements Initializable {
+
+    @FXML
+    private RadioButton greyRocket;
+
+    @FXML
+    private ToggleGroup buttonGroup;
+
+    @FXML
+    private RadioButton whiteRocket;
+
+    @FXML
+    private RadioButton blueRocket;
+
 
     @FXML
     private AnchorPane newGamePane;
@@ -56,5 +78,33 @@ public class MenuController {
     @FXML
     void clickScores(ActionEvent event) {
         scoresPane.toFront();
+    }
+
+    @FXML
+    void whiteSelected(ActionEvent event) throws FileNotFoundException {
+
+        FileInputStream inputstream = new FileInputStream("C:\\Users\\asus\\Desktop\\Semestr_V\\Metody_numeryczne\\SpaceshipGame\\Resources\\rocket2.png");
+        Image image = new Image(inputstream);
+        RocketImage.INSTANCE.getImageView().setImage(image);
+    }
+
+    @FXML
+    void greySelected(ActionEvent event) throws FileNotFoundException {
+        FileInputStream inputstream = new FileInputStream("C:\\Users\\asus\\Desktop\\Semestr_V\\Metody_numeryczne\\SpaceshipGame\\Resources\\rocket1.png");
+        Image image = new Image(inputstream);
+        RocketImage.INSTANCE.getImageView().setImage(image);
+    }
+
+    @FXML
+    void blueSelected(ActionEvent event) throws FileNotFoundException {
+        System.out.println("jestem tuu");
+        FileInputStream inputstream = new FileInputStream("C:\\Users\\asus\\Desktop\\Semestr_V\\Metody_numeryczne\\SpaceshipGame\\Resources\\rocket3.png");
+        Image image = new Image(inputstream);
+        RocketImage.INSTANCE.getImageView().setImage(image);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }
