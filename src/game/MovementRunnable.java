@@ -1,7 +1,7 @@
 package game;
 
 import game.calculations.RocketMovement;
-import game.data.MovementStateHolder;
+import game.data.State;
 import game.interfaces.Observable;
 import game.interfaces.Observer;
 
@@ -13,13 +13,26 @@ public class MovementRunnable implements Observable, Runnable {
     private Thread thread;
     protected volatile boolean isRunning = false;
     protected volatile boolean isPaused = false;
-    private static final int INTERVAL = 60000;
-    private MovementStateHolder movementStateHolder;
-    private double fuelBurning = 0;
+    private double fuelBurning;
     private double height = 50000 ;
     private double velocity = -150;
     private double mass = 2730.14;
+    private double tStart = 0;
+    private double tStop = 1;
+
     private volatile List<Observer> observers = new ArrayList<>();
+
+    private State state;
+
+    public MovementRunnable(double fuelBurning, State state) {
+        this.fuelBurning = fuelBurning;
+        this.state = state;
+    }
+
+    public void start() {
+        thread = new Thread(this, "Movement");
+        thread.start();
+    }
 
     @Override
     public void addObserver(Observer observer) {
@@ -37,7 +50,7 @@ public class MovementRunnable implements Observable, Runnable {
 
     @Override
     public void updateObservers() {
-        observers.forEach(observer -> observer.update(movementStateHolder));
+            observers.forEach(observer -> observer.update(state));
     }
 
     @Override
@@ -51,12 +64,52 @@ public class MovementRunnable implements Observable, Runnable {
                         this.wait();
                     }
                 }
-                movementStateHolder = rocketMovement.calculateMovementEquation(height, velocity, mass, fuelBurning);
+                state = rocketMovement.calculateMovementEquation(height, velocity, mass, fuelBurning);
+                rocketMovement.settStart(tStart);
+                rocketMovement.settStop(tStop);
+                tStart += 1;
+                tStop += 1;
+
                 updateObservers();
-                Thread.sleep(INTERVAL);
+                height = state.getHeight();
+                mass = state.getMass();
+                velocity = state.getVelocity();
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
+    }
+
+    public double getFuelBurning() {
+        return fuelBurning;
+    }
+
+    public void setFuelBurning(double fuelBurning) {
+        this.fuelBurning = fuelBurning;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
+    public double getMass() {
+        return mass;
+    }
+
+    public void setMass(double mass) {
+        this.mass = mass;
     }
 }

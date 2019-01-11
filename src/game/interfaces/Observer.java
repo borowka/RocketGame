@@ -1,8 +1,8 @@
 package game.interfaces;
 
-import game.data.MovementStateHolder;
+import game.data.State;
 
 public interface Observer {
 
-    void update(MovementStateHolder movementStateHolder);
+    void update(State state);
 }

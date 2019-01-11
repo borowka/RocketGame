@@ -20,12 +20,8 @@ public class MovementEquation implements FirstOrderDifferentialEquations {
 
     public void computeDerivatives(double t, double[] x, double[] dxdt) throws MaxCountExceededException, DimensionMismatchException {
         dxdt[0] = x[1];
-        //height equation
         dxdt[1] = - MOON_GRAVITY - GASES_VELOCITY * fuelBurning / x[2];
-        //speed equation
         dxdt[2] = fuelBurning;
-        //weight equation
-
     }
 
 }

@@ -2,18 +2,20 @@ package game.controllers;
 
 import game.Main;
 import game.MovementRunnable;
-import game.data.MovementStateHolder;
+import game.data.MovementData;
+import game.data.State;
 import game.model.RocketImage;
+import game.updater.ChartUpdater;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -24,7 +26,7 @@ import java.util.ResourceBundle;
 public class GameController implements Initializable {
 
     MovementRunnable movementRunnable;
-    MovementStateHolder movementStateHolder = new MovementStateHolder();
+    MovementData movementData = new MovementData();
 
     @FXML
     private Button btnMenu;
@@ -57,6 +59,15 @@ public class GameController implements Initializable {
     private Label propulsivePowerLabel;
 
     @FXML
+    private ScatterChart<Number, Number> phaseChart;
+
+    @FXML
+    private NumberAxis vAxis;
+
+    @FXML
+    private NumberAxis hAxis;
+
+    @FXML
     void clickExit(ActionEvent event) {
         Platform.exit();
     }
@@ -68,9 +79,14 @@ public class GameController implements Initializable {
 
     @FXML
     void playGame(ActionEvent event) {
-        //START THEREAT
-        //create observer and observable
-        //update observers
+        double fuelBurning = propulsivePower.getValue()*(-16.5)/100;
+        movementData.setFuelBurning(fuelBurning);
+        State state = movementData.getMovementState();
+        movementRunnable = new MovementRunnable(fuelBurning, state);
+        ChartUpdater chartUpdater = new ChartUpdater(vAxis, hAxis, phaseChart);
+        movementRunnable.addObserver(movementData);
+        movementRunnable.addObserver(chartUpdater);
+        movementRunnable.start();
     }
 
     @FXML
@@ -100,6 +116,6 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         RocketImage.INSTANCE.setImageView(rocket);
-        movementStateHolder.clear();
+
     }
 }

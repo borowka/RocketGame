@@ -1,27 +1,51 @@
 package game.calculations;
 
-import game.data.MovementStateHolder;
+import game.data.State;
+import game.test.MovementEquationResults;
 import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
 import org.apache.commons.math3.ode.FirstOrderIntegrator;
 import org.apache.commons.math3.ode.nonstiff.EulerIntegrator;
 
 public class RocketMovement {
 
-    public MovementStateHolder calculateMovementEquation(double height, double velocity, double mass, double fuelBurning) {
+    private double tStart = 0;
+    private double tStop = 1;
+
+
+    public State calculateMovementEquation(double height, double velocity, double mass, double fuelBurning) {
         FirstOrderDifferentialEquations differentialEquation = new MovementEquation(fuelBurning);
-        FirstOrderIntegrator integrator = new EulerIntegrator(0.01);
+        FirstOrderIntegrator integrator = new EulerIntegrator(1);
         double[] xStart = new double[]{height, velocity, mass};
         double[] xStop = new double[]{0, -20000, 1000};
 
         MovementEquationResults movementEquationResults = new MovementEquationResults();
-        integrator.addStepHandler(movementEquationResults);
-        integrator.integrate(differentialEquation, 0, xStart, 10, xStop );
+        SimpleResults simpleResults = new SimpleResults();
+        integrator.addStepHandler(simpleResults);
+        integrator.integrate(differentialEquation, tStart, xStart, tStop, xStop );
 
-        MovementStateHolder movementStateHolder = new MovementStateHolder();
-        movementStateHolder.setHeight(movementEquationResults.gethList());
-        movementStateHolder.setVelocity(movementEquationResults.getvList());
-        movementStateHolder.setMass(movementEquationResults.getmList());
+        State state = new State();
+        state.setHeight(simpleResults.getHeight());
+        state.setVelocity(simpleResults.getVelocity());
+        state.setMass(simpleResults.getMass());
 
-        return movementStateHolder;
+        return state;
     }
+
+    public double gettStart() {
+        return tStart;
+    }
+
+    public void settStart(double tStart) {
+        this.tStart = tStart;
+    }
+
+    public double gettStop() {
+        return tStop;
+    }
+
+    public void settStop(double tStop) {
+        this.tStop = tStop;
+    }
+
+
 }

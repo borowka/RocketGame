@@ -1,4 +1,4 @@
-package game.calculations;
+package game.test;
 
 import org.apache.commons.math3.exception.MaxCountExceededException;
 import org.apache.commons.math3.ode.sampling.StepHandler;
@@ -11,6 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MovementEquationResults implements StepHandler {
+    private double time;
+    private double height;
+    private double velocity;
+    private double mass;
     private List<Double> tList = new ArrayList<>();
     private List<Double> hList = new ArrayList<>();
     private List<Double> vList = new ArrayList<>();
@@ -24,6 +28,10 @@ public class MovementEquationResults implements StepHandler {
             throws MaxCountExceededException {
         double t = stepInterpolator.getCurrentTime();
         double[] x = stepInterpolator.getInterpolatedState();
+        time = t;
+        height = x[0];
+        velocity = x[1];
+        mass = x[2];
         tList.add(t);
         hList.add(x[0]);
         vList.add(x[1]);
