@@ -1,9 +1,11 @@
 package game;
 
 import game.calculations.RocketMovement;
-import game.data.State;
+import game.model.State;
 import game.interfaces.Observable;
 import game.interfaces.Observer;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +18,19 @@ public class MovementRunnable implements Observable, Runnable {
     private double fuelBurning;
     private double height = 50000 ;
     private double velocity = -150;
-    private double mass = 2730.14;
     private double tStart = 0;
     private double tStop = 1;
+    private double mass = 2730.14;
+
+    private Slider slider;
+    private Label massLabel;
 
     private volatile List<Observer> observers = new ArrayList<>();
 
     private State state;
 
-    public MovementRunnable(double fuelBurning, State state) {
-        this.fuelBurning = fuelBurning;
+    public MovementRunnable(Slider slider, State state) {
+        this.slider = slider;
         this.state = state;
     }
 
@@ -64,16 +69,19 @@ public class MovementRunnable implements Observable, Runnable {
                         this.wait();
                     }
                 }
+
                 state = rocketMovement.calculateMovementEquation(height, velocity, mass, fuelBurning);
                 rocketMovement.settStart(tStart);
                 rocketMovement.settStop(tStop);
                 tStart += 1;
                 tStop += 1;
-
                 updateObservers();
                 height = state.getHeight();
                 mass = state.getMass();
                 velocity = state.getVelocity();
+                double sliderValue = Double.valueOf((slider.getValue()*(-16.5)/100));
+                System.out.println(sliderValue);
+                fuelBurning = sliderValue;
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -105,11 +113,4 @@ public class MovementRunnable implements Observable, Runnable {
         this.velocity = velocity;
     }
 
-    public double getMass() {
-        return mass;
-    }
-
-    public void setMass(double mass) {
-        this.mass = mass;
-    }
 }

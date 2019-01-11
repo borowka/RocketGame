@@ -1,6 +1,6 @@
 package game.updater;
 
-import game.data.State;
+import game.model.State;
 import game.interfaces.Observer;
 import javafx.application.Platform;
 import javafx.scene.chart.NumberAxis;

@@ -1,9 +1,9 @@
 package game.calculations;
 
-import game.data.State;
-import game.test.MovementEquationResults;
+import game.model.State;
 import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
 import org.apache.commons.math3.ode.FirstOrderIntegrator;
+import org.apache.commons.math3.ode.nonstiff.ClassicalRungeKuttaIntegrator;
 import org.apache.commons.math3.ode.nonstiff.EulerIntegrator;
 
 public class RocketMovement {
@@ -14,14 +14,13 @@ public class RocketMovement {
 
     public State calculateMovementEquation(double height, double velocity, double mass, double fuelBurning) {
         FirstOrderDifferentialEquations differentialEquation = new MovementEquation(fuelBurning);
-        FirstOrderIntegrator integrator = new EulerIntegrator(1);
+        //FirstOrderIntegrator integrator = new EulerIntegrator(0.001);
+        FirstOrderIntegrator in2 = new ClassicalRungeKuttaIntegrator(0.001);
         double[] xStart = new double[]{height, velocity, mass};
         double[] xStop = new double[]{0, -20000, 1000};
-
-        MovementEquationResults movementEquationResults = new MovementEquationResults();
         SimpleResults simpleResults = new SimpleResults();
-        integrator.addStepHandler(simpleResults);
-        integrator.integrate(differentialEquation, tStart, xStart, tStop, xStop );
+        in2.addStepHandler(simpleResults);
+        in2.integrate(differentialEquation, tStart, xStart, tStop, xStop );
 
         State state = new State();
         state.setHeight(simpleResults.getHeight());

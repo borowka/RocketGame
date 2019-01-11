@@ -1,4 +1,4 @@
-package game.data;
+package game.model;
 
 public class State{
 

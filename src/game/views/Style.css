@@ -4,9 +4,11 @@
     -fx-text-fill: white;
 
 }
+
 .label{
     -fx-text-fill: white;
 }
+
 .button{
     -fx-background-color: #333333;
     -fx-text-fill: white;
@@ -35,4 +37,12 @@
 
 #statisticsPane{
     -fx-background-color: #333333
+}
+
+#spaceAnimationPane{
+    -fx-background-image: url("bg.jpg");
+}
+
+.chart-plot-background {
+    -fx-background-color: #333333;
 }

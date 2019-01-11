@@ -23,7 +23,7 @@ public class SimpleResults implements StepHandler {
         height = x[0];
         velocity = x[1];
         mass = x[2];
-        System.out.println(" t = " + t + " " + Arrays.toString(x));
+        //System.out.println(" t = " + t + " " + Arrays.toString(x));
     }
 
     public double getTime() {

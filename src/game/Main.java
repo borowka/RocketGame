@@ -33,7 +33,7 @@ public class Main extends Application {
             Image image = new Image(inputStream);
             Cursor cursor = new ImageCursor(image);
             scene.setCursor(cursor);
-            scene.getStylesheets().add(getClass().getResource("css/Style.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("views/Style.css").toExternalForm());
             primaryStage.setTitle("SPACESHIP GAME");
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);

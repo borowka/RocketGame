@@ -8,7 +8,7 @@ public class MovementEquation implements FirstOrderDifferentialEquations {
 
     private static final double GASES_VELOCITY = 636;
     private static final double MOON_GRAVITY = 1.63;
-    private double fuelBurning;
+    private double fuelBurning = 0;
 
     public MovementEquation(double fuelBurning) {
         this.fuelBurning = fuelBurning;

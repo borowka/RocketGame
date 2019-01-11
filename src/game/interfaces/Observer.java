@@ -1,6 +1,6 @@
 package game.interfaces;
 
-import game.data.State;
+import game.model.State;
 
 public interface Observer {
 

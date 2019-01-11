@@ -2,8 +2,9 @@ package game.controllers;
 
 import game.Main;
 import game.MovementRunnable;
-import game.data.MovementData;
-import game.data.State;
+import game.updater.LabelUpdater;
+import game.updater.MovementDataUpdater;
+import game.model.State;
 import game.model.RocketImage;
 import game.updater.ChartUpdater;
 import javafx.application.Platform;
@@ -26,7 +27,7 @@ import java.util.ResourceBundle;
 public class GameController implements Initializable {
 
     MovementRunnable movementRunnable;
-    MovementData movementData = new MovementData();
+    MovementDataUpdater movementDataUpdater = new MovementDataUpdater();
 
     @FXML
     private Button btnMenu;
@@ -47,6 +48,9 @@ public class GameController implements Initializable {
     private AnchorPane statisticsPane;
 
     @FXML
+    private AnchorPane sliderPane;
+
+    @FXML
     private ImageView rocket;
 
     @FXML
@@ -57,6 +61,18 @@ public class GameController implements Initializable {
 
     @FXML
     private Label propulsivePowerLabel;
+
+    @FXML
+    private Label velocityLabel;
+
+    @FXML
+    private Label heightLabel;
+
+    @FXML
+    private Label massLabel;
+
+    @FXML
+    private Label fuelLevelLabel;
 
     @FXML
     private ScatterChart<Number, Number> phaseChart;
@@ -80,11 +96,12 @@ public class GameController implements Initializable {
     @FXML
     void playGame(ActionEvent event) {
         double fuelBurning = propulsivePower.getValue()*(-16.5)/100;
-        movementData.setFuelBurning(fuelBurning);
-        State state = movementData.getMovementState();
-        movementRunnable = new MovementRunnable(fuelBurning, state);
+        State state = movementDataUpdater.getMovementState();
+        movementRunnable = new MovementRunnable(propulsivePower, state);
         ChartUpdater chartUpdater = new ChartUpdater(vAxis, hAxis, phaseChart);
-        movementRunnable.addObserver(movementData);
+        LabelUpdater labelUpdater = new LabelUpdater(heightLabel,velocityLabel,fuelLevelLabel,massLabel);
+        movementRunnable.addObserver(labelUpdater);
+        movementRunnable.addObserver(movementDataUpdater);
         movementRunnable.addObserver(chartUpdater);
         movementRunnable.start();
     }
@@ -97,7 +114,7 @@ public class GameController implements Initializable {
             System.out.println(propulsivePower.getValue());});
 
             try {
-                Thread.sleep(10000);
+                Thread.sleep(1000);
             }
             catch(InterruptedException ex) {
                 ex.printStackTrace();
