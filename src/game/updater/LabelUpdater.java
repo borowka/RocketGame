@@ -9,7 +9,6 @@ import java.text.DecimalFormat;
 
 public class LabelUpdater implements Observer {
 
-
     private Label heightLabel;
     private Label velocityLabel;
     private Label fuelLabel;

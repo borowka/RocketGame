@@ -4,32 +4,41 @@ import game.calculations.RocketMovement;
 import game.model.State;
 import game.interfaces.Observable;
 import game.interfaces.Observer;
-import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovementRunnable implements Observable, Runnable {
 
+    private static final int ROCKET_MASS = 1000;
+    private static final int VELOCITY_MIN = -2;
+    private static final int VELOCITY_MAX = 2;
+    private static final int INTERVAL = 200;
+
     private Thread thread;
     protected volatile boolean isRunning = false;
-    protected volatile boolean isPaused = false;
     private double fuelBurning;
-    private double height = 50000 ;
+    private double height = 50000;
     private double velocity = -150;
-    private double tStart = 0;
-    private double tStop = 1;
     private double mass = 2730.14;
+    private double tStart = 0;
+    private double tStop = 0.2;
+    private double step = 0.2;
 
+    private ImageView winView;
+    private ImageView failureView;
+    private ImageView flame;
     private Slider slider;
-    private Label massLabel;
 
     private volatile List<Observer> observers = new ArrayList<>();
-
     private State state;
 
-    public MovementRunnable(Slider slider, State state) {
+    public MovementRunnable(Slider slider, State state, ImageView winView, ImageView failureView, ImageView flame) {
+        this.winView = winView;
+        this.failureView = failureView;
+        this.flame = flame;
         this.slider = slider;
         this.state = state;
     }
@@ -53,9 +62,16 @@ public class MovementRunnable implements Observable, Runnable {
         }
     }
 
+    public void stop() {
+        isRunning = false;
+        failureView.setVisible(false);
+        flame.setVisible(false);
+        winView.setVisible(false);
+    }
+
     @Override
     public void updateObservers() {
-            observers.forEach(observer -> observer.update(state));
+        observers.forEach(observer -> observer.update(state));
     }
 
     @Override
@@ -64,53 +80,39 @@ public class MovementRunnable implements Observable, Runnable {
         RocketMovement rocketMovement = new RocketMovement();
         while (isRunning) {
             try {
-                synchronized (this) {
-                    if (isPaused) {
-                        this.wait();
-                    }
-                }
-
                 state = rocketMovement.calculateMovementEquation(height, velocity, mass, fuelBurning);
                 rocketMovement.settStart(tStart);
                 rocketMovement.settStop(tStop);
-                tStart += 1;
-                tStop += 1;
+                tStart += step;
+                tStop += step;
                 updateObservers();
                 height = state.getHeight();
                 mass = state.getMass();
                 velocity = state.getVelocity();
-                double sliderValue = Double.valueOf((slider.getValue()*(-16.5)/100));
-                System.out.println(sliderValue);
+                double sliderValue = Double.valueOf((slider.getValue() * (-16.5) / 100));
                 fuelBurning = sliderValue;
-                Thread.sleep(1000);
+
+                if (height <= 0) {
+                    stop();
+                    if (velocity >= VELOCITY_MIN && velocity <= VELOCITY_MAX) {
+                        winView.setVisible(true);
+                    } else {
+                        failureView.setVisible(true);
+                        flame.setVisible(true);
+                    }
+                } else if ((mass - ROCKET_MASS) <= 0) {
+                    stop();
+                    if (velocity >= VELOCITY_MIN && velocity <= VELOCITY_MAX) {
+                        winView.setVisible(true);
+                    } else {
+                        failureView.setVisible(true);
+                    }
+                }
+
+                Thread.sleep(INTERVAL);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
     }
-
-    public double getFuelBurning() {
-        return fuelBurning;
-    }
-
-    public void setFuelBurning(double fuelBurning) {
-        this.fuelBurning = fuelBurning;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public double getVelocity() {
-        return velocity;
-    }
-
-    public void setVelocity(double velocity) {
-        this.velocity = velocity;
-    }
-
 }

@@ -2,10 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.controllers.StartController">
    <children>
@@ -14,10 +14,11 @@
             <Image url="@win.jpg" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="203.0" layoutY="73.0" prefHeight="40.0" prefWidth="400.0" text="WELCOME ON BOARD!&#10;" textAlignment="CENTER" AnchorPane.bottomAnchor="487.0" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="197.0" AnchorPane.topAnchor="73.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="170.0" layoutY="73.0" prefHeight="40.0" prefWidth="509.0" text="WELCOME ON THE BOARD!&#10;" textAlignment="CENTER" AnchorPane.bottomAnchor="487.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="73.0">
+         <font>
+            <Font size="34.0" />
+         </font></Label>
       <Button fx:id="btnInit" layoutX="200.0" layoutY="511.0" mnemonicParsing="false" onAction="#init" text="START" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="511.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="299.0" layoutY="198.0" prefHeight="56.0" prefWidth="400.0" text="This is your mission:&#10;Land your rocket in the moon!&#10;" textAlignment="CENTER" />
-      <TextField fx:id="userName" alignment="CENTER" layoutX="413.0" layoutY="120.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="263.0" layoutY="120.0" prefHeight="25.0" prefWidth="149.0" text="Your Name:&#10;" textAlignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="299.0" layoutY="198.0" prefHeight="56.0" prefWidth="400.0" text="This is your mission:&#10;Land your rocket on the moon!&#10;" textAlignment="CENTER" />
    </children>
 </AnchorPane>

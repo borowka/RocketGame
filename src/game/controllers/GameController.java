@@ -7,6 +7,8 @@ import game.updater.MovementDataUpdater;
 import game.model.State;
 import game.model.RocketImage;
 import game.updater.ChartUpdater;
+import game.updater.RocketMovementUpdater;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +30,16 @@ public class GameController implements Initializable {
 
     MovementRunnable movementRunnable;
     MovementDataUpdater movementDataUpdater = new MovementDataUpdater();
+    TranslateTransition translateTransition = new TranslateTransition();
+
+    @FXML
+    private ImageView winView;
+
+    @FXML
+    private ImageView failureView;
+
+    @FXML
+    private ImageView flameView;
 
     @FXML
     private Button btnMenu;
@@ -42,13 +54,7 @@ public class GameController implements Initializable {
     private AnchorPane spaceAnimationPane;
 
     @FXML
-    private AnchorPane gameBackgroundPane;
-
-    @FXML
     private AnchorPane statisticsPane;
-
-    @FXML
-    private AnchorPane sliderPane;
 
     @FXML
     private ImageView rocket;
@@ -91,15 +97,20 @@ public class GameController implements Initializable {
     @FXML
     void clickMenu(ActionEvent event) {
         Main.setPane(1);
+        movementRunnable.stop();
     }
 
     @FXML
     void playGame(ActionEvent event) {
-        double fuelBurning = propulsivePower.getValue()*(-16.5)/100;
+        phaseChart.getData().clear();
+        double fuelBurning = propulsivePower.getValue() * (-16.5) / 100;
         State state = movementDataUpdater.getMovementState();
-        movementRunnable = new MovementRunnable(propulsivePower, state);
+        movementRunnable = new MovementRunnable(propulsivePower, state, winView, failureView, flameView);
         ChartUpdater chartUpdater = new ChartUpdater(vAxis, hAxis, phaseChart);
-        LabelUpdater labelUpdater = new LabelUpdater(heightLabel,velocityLabel,fuelLevelLabel,massLabel);
+        LabelUpdater labelUpdater = new LabelUpdater(heightLabel, velocityLabel, fuelLevelLabel, massLabel);
+        translateTransition.setNode(rocket);
+        RocketMovementUpdater rocketMovementUpdater = new RocketMovementUpdater(rocket);
+        movementRunnable.addObserver(rocketMovementUpdater);
         movementRunnable.addObserver(labelUpdater);
         movementRunnable.addObserver(movementDataUpdater);
         movementRunnable.addObserver(chartUpdater);
@@ -110,13 +121,14 @@ public class GameController implements Initializable {
     void changePropulsivePower(MouseEvent event) {
 
         new Thread(() -> {
-            Platform.runLater(() -> {propulsivePower.setDisable(true);
-            System.out.println(propulsivePower.getValue());});
+            Platform.runLater(() -> {
+                propulsivePower.setDisable(true);
+                System.out.println(propulsivePower.getValue());
+            });
 
             try {
                 Thread.sleep(1000);
-            }
-            catch(InterruptedException ex) {
+            } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
             Platform.runLater(() -> propulsivePower.setDisable(false));
@@ -126,13 +138,14 @@ public class GameController implements Initializable {
         String propulsivePowerValue = df.format(Double.valueOf(propulsivePower.getValue()));
         propulsivePowerLabel.textProperty().set(propulsivePowerValue);
 
-        String fuelBurning = df.format(Double.valueOf(propulsivePower.getValue()*(-16.5)/100));
+        String fuelBurning = df.format(Double.valueOf(propulsivePower.getValue() * (-16.5) / 100));
         fuelBurningLabel.textProperty().set(fuelBurning);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         RocketImage.INSTANCE.setImageView(rocket);
-
+        rocket.setY(-178);
+        rocket.setX(-10);
     }
 }

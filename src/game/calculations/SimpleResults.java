@@ -26,36 +26,17 @@ public class SimpleResults implements StepHandler {
         //System.out.println(" t = " + t + " " + Arrays.toString(x));
     }
 
-    public double getTime() {
-        return time;
-    }
-
-    public void setTime(double time) {
-        this.time = time;
-    }
-
     public double getHeight() {
         return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
     }
 
     public double getVelocity() {
         return velocity;
     }
 
-    public void setVelocity(double velocity) {
-        this.velocity = velocity;
-    }
-
     public double getMass() {
         return mass;
     }
 
-    public void setMass(double mass) {
-        this.mass = mass;
-    }
 }
 

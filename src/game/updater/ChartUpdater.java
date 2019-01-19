@@ -18,7 +18,6 @@ public class ChartUpdater implements Observer {
     private List<Double> vList = new ArrayList<>();
     private List<Double> hList = new ArrayList<>();
 
-
     public ChartUpdater(NumberAxis vAxis, NumberAxis hAxis, ScatterChart<Number, Number> phaseChart) {
         this.vAxis = vAxis;
         this.hAxis = hAxis;
@@ -27,7 +26,7 @@ public class ChartUpdater implements Observer {
 
     @Override
     public void update(State state) {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             phaseChart.getData().clear();
             XYChart.Series phaseSeries = new XYChart.Series();
             double height = state.getHeight();

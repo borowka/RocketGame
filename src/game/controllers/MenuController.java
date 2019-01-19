@@ -11,8 +11,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import java.io.*;
 
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,21 +30,14 @@ public class MenuController implements Initializable {
     @FXML
     private RadioButton blueRocket;
 
-
     @FXML
     private AnchorPane newGamePane;
-
-    @FXML
-    private AnchorPane scoresPane;
 
     @FXML
     private AnchorPane helpPane;
 
     @FXML
     private Button btnNewGame;
-
-    @FXML
-    private Button btnScores;
 
     @FXML
     private Button btnHelp;
@@ -67,17 +60,15 @@ public class MenuController implements Initializable {
 
     @FXML
     void clickHelp(ActionEvent event) {
-        helpPane.toFront();
+        helpPane.setVisible(true);
+        newGamePane.setVisible(false);
     }
 
     @FXML
     void clickNewGame(ActionEvent event) {
         newGamePane.toFront();
-    }
-
-    @FXML
-    void clickScores(ActionEvent event) {
-        scoresPane.toFront();
+        newGamePane.setVisible(true);
+        helpPane.setVisible(false);
     }
 
     @FXML
@@ -97,7 +88,6 @@ public class MenuController implements Initializable {
 
     @FXML
     void blueSelected(ActionEvent event) throws FileNotFoundException {
-        System.out.println("jestem tuu");
         FileInputStream inputstream = new FileInputStream("C:\\Users\\asus\\Desktop\\Semestr_V\\Metody_numeryczne\\SpaceshipGame\\Resources\\rocket3.png");
         Image image = new Image(inputstream);
         RocketImage.INSTANCE.getImageView().setImage(image);
@@ -105,6 +95,7 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        newGamePane.toFront();
+        helpPane.toBack();
     }
 }

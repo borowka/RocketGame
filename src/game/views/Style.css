@@ -2,7 +2,6 @@
     -fx-background-color: #00425F ;
     -fx-font-size: 15pt;
     -fx-text-fill: white;
-
 }
 
 .label{
@@ -10,7 +9,7 @@
 }
 
 .button{
-    -fx-background-color: #333333;
+    -fx-background-color: #e7005d;
     -fx-text-fill: white;
     -fx-alignment: CENTER;
     -fx-background-radius: 30;
@@ -28,10 +27,8 @@
 #playPane{
     -fx-background-color: #333333;
 }
+
 #helpPane{
-    -fx-background-color: #333333;
-}
-#scoresPane{
     -fx-background-color: #333333;
 }
 

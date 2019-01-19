@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class Main extends Application {
             primaryStage.setTitle("SPACESHIP GAME");
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
 
         } catch (Exception e ){

@@ -14,65 +14,80 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.controllers.GameController">
-   <children>
-      <AnchorPane layoutX="37.0" layoutY="11.0" onKeyReleased="#changePropulsivePower" prefHeight="92.0" prefWidth="765.0" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Button fx:id="btnMenu" layoutX="51.0" layoutY="38.0" minWidth="160.0" mnemonicParsing="false" onAction="#clickMenu" text="MENU" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="620.0" AnchorPane.topAnchor="30.0" />
-            <Button fx:id="btnExit" layoutX="603.0" layoutY="37.0" minWidth="160.0" mnemonicParsing="false" onAction="#clickExit" text="EXIT" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="620.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
-            <Button fx:id="playGameButton" layoutX="220.0" layoutY="30.0" mnemonicParsing="false" onAction="#playGame" prefHeight="40.0" prefWidth="379.0" text="PLAY" />
-         </children></AnchorPane>
-      <SplitPane dividerPositions="0.4787" layoutX="321.0" layoutY="95.0" pickOnBounds="false" prefHeight="505.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0">
-        <items>
-          <AnchorPane fx:id="spaceAnimationPane" minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="387.0">
-               <children>
-                  <ImageView fx:id="rocket" fitHeight="150.0" fitWidth="200.0" layoutX="131.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@schipchooser/rocket2.png" />
-                     </image>
-                  </ImageView>
-                  <Slider fx:id="propulsivePower" layoutX="73.0" layoutY="454.0" onMouseReleased="#changePropulsivePower" prefHeight="14.0" prefWidth="241.0" />
-               </children></AnchorPane>
-          <AnchorPane fx:id="statisticsPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ScatterChart fx:id="phaseChart" animated="false" cache="true" layoutX="7.0" layoutY="283.0" legendVisible="false" prefHeight="210.0" prefWidth="379.0">
-                    <xAxis>
-                      <NumberAxis fx:id="vAxis" side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis fx:id="hAxis" side="LEFT" />
-                    </yAxis>
-                  </ScatterChart>
-                  <GridPane layoutX="25.0" layoutY="8.0" prefHeight="276.0" prefWidth="386.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="219.0" text="Fuel:    " textAlignment="CENTER" />
-                        <Label fx:id="fuelLevelLabel" prefHeight="17.0" prefWidth="205.0" text="0" GridPane.columnIndex="1" />
-                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="211.0" text="Mass:    " GridPane.rowIndex="1" />
-                        <Label fx:id="massLabel" prefHeight="17.0" prefWidth="252.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="219.0" text="Velocity:    " GridPane.rowIndex="2" />
-                        <Label fx:id="velocityLabel" prefHeight="17.0" prefWidth="263.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="234.0" text="Height:    " GridPane.rowIndex="3" />
-                        <Label fx:id="heightLabel" prefHeight="8.0" prefWidth="262.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="222.0" text="Fuel Burning:    " textAlignment="CENTER" GridPane.rowIndex="4" />
-                        <Label fx:id="fuelBurningLabel" alignment="BOTTOM_LEFT" prefHeight="17.0" prefWidth="302.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                      
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="216.0" text="Propulsive Power:    " GridPane.rowIndex="5" />
-                        <Label fx:id="propulsivePowerLabel" alignment="BOTTOM_LEFT" prefHeight="17.0" prefWidth="297.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                     </children>
-                  </GridPane>
-               </children></AnchorPane>
-        </items>
-      </SplitPane>
-   </children>
+    <children>
+        <AnchorPane layoutX="37.0" layoutY="11.0" onKeyReleased="#changePropulsivePower" prefHeight="92.0" prefWidth="765.0" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Button fx:id="btnMenu" layoutX="51.0" layoutY="38.0" minWidth="160.0" mnemonicParsing="false" onAction="#clickMenu" text="MENU" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="620.0" AnchorPane.topAnchor="30.0" />
+                <Button fx:id="btnExit" layoutX="603.0" layoutY="37.0" minWidth="160.0" mnemonicParsing="false" onAction="#clickExit" text="EXIT" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="620.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
+                <Button fx:id="playGameButton" layoutX="220.0" layoutY="30.0" mnemonicParsing="false" onAction="#playGame" prefHeight="40.0" prefWidth="379.0" text="PLAY" />
+            </children></AnchorPane>
+        <SplitPane dividerPositions="0.4787" layoutX="321.0" layoutY="95.0" pickOnBounds="false" prefHeight="505.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0">
+            <items>
+                <AnchorPane fx:id="spaceAnimationPane" minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="387.0">
+                    <children>
+                        <ImageView fx:id="rocket" fitHeight="150.0" fitWidth="200.0" layoutX="131.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@schipchooser/rocket2.png" />
+                            </image>
+                        </ImageView>
+                        <Slider fx:id="propulsivePower" layoutX="73.0" layoutY="454.0" onMouseReleased="#changePropulsivePower" prefHeight="14.0" prefWidth="241.0" />
+                        <ImageView fx:id="winView" fitHeight="404.0" fitWidth="379.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                            <image>
+                                <Image url="@win.jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="failureView" fitHeight="140.0" fitWidth="379.0" layoutX="67.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                            <image>
+                                <Image url="@fail.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="flameView" fitHeight="240.0" fitWidth="200.0" layoutX="100.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                            <image>
+                                <Image url="@flame.png" />
+                            </image>
+                        </ImageView>
+                    </children></AnchorPane>
+                <AnchorPane fx:id="statisticsPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <ScatterChart fx:id="phaseChart" animated="false" cache="true" layoutX="7.0" layoutY="283.0" legendVisible="false" prefHeight="210.0" prefWidth="379.0">
+                            <xAxis>
+                                <NumberAxis fx:id="vAxis" side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="hAxis" side="LEFT" />
+                            </yAxis>
+                        </ScatterChart>
+                        <GridPane layoutX="25.0" layoutY="8.0" prefHeight="276.0" prefWidth="386.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="219.0" text="Fuel:    " textAlignment="CENTER" />
+                                <Label fx:id="fuelLevelLabel" prefHeight="17.0" prefWidth="205.0" text="0" GridPane.columnIndex="1" />
+                                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="211.0" text="Mass:    " GridPane.rowIndex="1" />
+                                <Label fx:id="massLabel" prefHeight="17.0" prefWidth="252.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="219.0" text="Velocity:    " GridPane.rowIndex="2" />
+                                <Label fx:id="velocityLabel" prefHeight="17.0" prefWidth="263.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="234.0" text="Height:    " GridPane.rowIndex="3" />
+                                <Label fx:id="heightLabel" prefHeight="8.0" prefWidth="262.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="222.0" text="Fuel Burning:    " textAlignment="CENTER" GridPane.rowIndex="4" />
+                                <Label fx:id="fuelBurningLabel" alignment="BOTTOM_LEFT" prefHeight="17.0" prefWidth="302.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="216.0" text="Propulsive Power:    " GridPane.rowIndex="5" />
+                                <Label fx:id="propulsivePowerLabel" alignment="BOTTOM_LEFT" prefHeight="17.0" prefWidth="297.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                            </children>
+                        </GridPane>
+                    </children></AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </AnchorPane>

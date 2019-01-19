@@ -3,6 +3,7 @@ package game.test;
 import game.calculations.MovementEquation;
 import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
 import org.apache.commons.math3.ode.FirstOrderIntegrator;
+import org.apache.commons.math3.ode.nonstiff.ClassicalRungeKuttaIntegrator;
 import org.apache.commons.math3.ode.nonstiff.EulerIntegrator;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ public class Tester {
 
     public static void main(String[] args) throws IOException {
         FirstOrderDifferentialEquations differentialEquation = new MovementEquation(0);
-        FirstOrderIntegrator integrator = new EulerIntegrator(0.1);
+        FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(0.1);
         double[] xStart = new double[]{50000, -150, 2730.14};
         double[] xStop = new double[]{0, -20000, 1000};
 
